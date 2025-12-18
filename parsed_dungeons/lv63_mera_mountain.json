@@ -1,0 +1,198 @@
+{
+  "spawns": [
+    365,
+    365,
+    371,
+    401,
+    368,
+    365,
+    366,
+    365
+  ],
+  "blocks": [
+    {
+      "rect": [
+        9,
+        374
+      ],
+      "enemies": [
+        401
+      ],
+      "respawn": [
+        367
+      ],
+      "clear": [
+        -1
+      ],
+      "vip": [
+        370
+      ],
+      "exceptional": [
+        365
+      ],
+      "text": "15366",
+      "countdown": 16
+    },
+    {
+      "rect": [
+        17,
+        370
+      ],
+      "enemies": [
+        368
+      ],
+      "respawn": [
+        82
+      ],
+      "clear": [
+        83
+      ],
+      "vip": [
+        84
+      ],
+      "exceptional": [
+        366
+      ],
+      "text": "23401",
+      "countdown": 24
+    },
+    {
+      "rect": [
+        25,
+        -1
+      ],
+      "enemies": [
+        366
+      ],
+      "respawn": [
+        370
+      ],
+      "clear": [
+        366
+      ],
+      "vip": [
+        -1
+      ],
+      "exceptional": [
+        366
+      ],
+      "text": "31365",
+      "countdown": 32
+    },
+    {
+      "rect": [
+        33,
+        371
+      ],
+      "enemies": [
+        374
+      ],
+      "respawn": [
+        371
+      ],
+      "clear": [
+        373
+      ],
+      "vip": [
+        371
+      ],
+      "exceptional": [
+        374
+      ],
+      "text": "39365",
+      "countdown": 40
+    },
+    {
+      "rect": [
+        41,
+        372
+      ],
+      "enemies": [
+        -1
+      ],
+      "respawn": [
+        372
+      ],
+      "clear": [
+        366
+      ],
+      "vip": [
+        370
+      ],
+      "exceptional": [
+        367
+      ],
+      "text": "47368",
+      "countdown": 48
+    },
+    {
+      "rect": [
+        49,
+        -1
+      ],
+      "enemies": [
+        369
+      ],
+      "respawn": [
+        369
+      ],
+      "clear": [
+        369
+      ],
+      "vip": [
+        373
+      ],
+      "exceptional": [
+        83
+      ],
+      "text": "5584",
+      "countdown": 56
+    },
+    {
+      "rect": [
+        57,
+        401
+      ],
+      "enemies": [
+        370
+      ],
+      "respawn": [
+        365
+      ],
+      "clear": [
+        366
+      ],
+      "vip": [
+        365
+      ],
+      "exceptional": [
+        -1
+      ],
+      "text": "63365",
+      "countdown": 64
+    },
+    {
+      "rect": [
+        65,
+        370
+      ],
+      "enemies": [
+        368
+      ],
+      "respawn": [
+        -1
+      ],
+      "clear": [
+        372
+      ],
+      "vip": [
+        372
+      ],
+      "exceptional": [
+        369
+      ],
+      "text": "71369",
+      "countdown": 72
+    }
+  ]
+}
