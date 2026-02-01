@@ -71,6 +71,17 @@ def next_line(lines: List[str], index: int, *, allow_empty: bool = False) -> Tup
     raise ValueError("Unexpected end of script data")
 
 
+def next_line_with_ints(
+    lines: List[str], index: int, *, min_count: int = 1
+) -> Tuple[List[int], str, int]:
+    while index < len(lines):
+        line, index = next_line(lines, index, allow_empty=False)
+        values = parse_ints(line)
+        if len(values) >= min_count:
+            return values, line, index
+    raise ValueError("Unexpected end of script data")
+
+
 def parse_spawn_array(line: str) -> SpawnArray:
     values = parse_ints(line)
     if not values:
@@ -84,10 +95,7 @@ def parse_script(name: str, text: str) -> ScriptData:
     lines = iter_lines(text)
     index = 0
 
-    line, index = next_line(lines, index)
-    spawn_count_values = parse_ints(line)
-    if not spawn_count_values:
-        raise ValueError("Missing spawn count")
+    spawn_count_values, _, index = next_line_with_ints(lines, index, min_count=1)
     spawn_count = spawn_count_values[0]
 
     spawns: List[SpawnTableEntry] = []
@@ -102,18 +110,12 @@ def parse_script(name: str, text: str) -> ScriptData:
             spawn_index, spawn_id = len(spawns), -1
         spawns.append(SpawnTableEntry(index=spawn_index, spawn_id=spawn_id))
 
-    line, index = next_line(lines, index)
-    block_count_values = parse_ints(line)
-    if not block_count_values:
-        raise ValueError("Missing block count")
+    block_count_values, _, index = next_line_with_ints(lines, index, min_count=1)
     block_count = block_count_values[0]
 
     blocks: List[Block] = []
     for _ in range(block_count):
-        line, index = next_line(lines, index)
-        area_values = parse_ints(line)
-        if len(area_values) < 4:
-            raise ValueError("Missing area rectangle values")
+        area_values, _, index = next_line_with_ints(lines, index, min_count=4)
         area = tuple(area_values[:4])
 
         line, index = next_line(lines, index)
@@ -134,10 +136,7 @@ def parse_script(name: str, text: str) -> ScriptData:
         line, index = next_line(lines, index, allow_empty=True)
         text_line = line.rstrip("\r\n")
 
-        line, index = next_line(lines, index)
-        value_values = parse_ints(line)
-        if not value_values:
-            raise ValueError("Missing block value")
+        value_values, _, index = next_line_with_ints(lines, index, min_count=1)
         value = value_values[0]
 
         blocks.append(
