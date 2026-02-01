@@ -97,34 +97,28 @@ def parse_dungeon_script(decoded: bytes) -> dict:
     block_count = int(block_match.group(1))
     cursor += 1
 
+    def read_data_line(label: str) -> str:
+        nonlocal cursor
+        while cursor < len(lines):
+            line = lines[cursor].strip()
+            cursor += 1
+            if not line:
+                continue
+            if line.lstrip().startswith(";"):
+                continue
+            return line
+        raise ValueError(f"Unexpected end of script while reading {label}")
+
     blocks = []
     for block_index in range(block_count):
-        while cursor < len(lines) and not lines[cursor].strip():
-            cursor += 1
-
-        rect = _parse_ints(lines[cursor].strip().split("\t"))
-        cursor += 1
-
-        enemies_raw = _parse_ints(lines[cursor].strip().split("\t"))
-        cursor += 1
-
-        respawn_raw = _parse_ints(lines[cursor].strip().split("\t"))
-        cursor += 1
-
-        clear_raw = _parse_ints(lines[cursor].strip().split("\t"))
-        cursor += 1
-
-        vip_raw = _parse_ints(lines[cursor].strip().split("\t"))
-        cursor += 1
-
-        exceptional_raw = _parse_ints(lines[cursor].strip().split("\t"))
-        cursor += 1
-
-        text = lines[cursor].replace("\t", "").strip()
-        cursor += 1
-
-        countdown_line = lines[cursor].strip()
-        cursor += 1
+        rect = _parse_ints(read_data_line("block rect").split("\t"))
+        enemies_raw = _parse_ints(read_data_line("block enemies").split("\t"))
+        respawn_raw = _parse_ints(read_data_line("block respawn").split("\t"))
+        clear_raw = _parse_ints(read_data_line("block clear").split("\t"))
+        vip_raw = _parse_ints(read_data_line("block vip").split("\t"))
+        exceptional_raw = _parse_ints(read_data_line("block exceptional").split("\t"))
+        text = read_data_line("block text").replace("\t", "").strip()
+        countdown_line = read_data_line("block countdown")
 
         countdown_match = re.search(r"(\d+)", countdown_line)
         countdown_value = int(countdown_match.group(1)) if countdown_match else 0
