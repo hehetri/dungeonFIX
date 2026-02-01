@@ -37,7 +37,14 @@ def decode_script(chunk: bytes) -> bytes:
 
 
 def _parse_ints(parts: Iterable[str]) -> List[int]:
-    return [int(part) for part in parts if part]
+    values: List[int] = []
+    for part in parts:
+        if not part:
+            continue
+        match = re.search(r"-?\d+", part)
+        if match:
+            values.append(int(match.group(0)))
+    return values
 
 
 def parse_dungeon_script(decoded: bytes) -> dict:
