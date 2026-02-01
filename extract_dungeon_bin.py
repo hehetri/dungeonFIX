@@ -72,7 +72,11 @@ def parse_dungeon_script(decoded: bytes) -> dict:
         cursor += 1
         if not line:
             continue
+        if line.lstrip().startswith(";"):
+            continue
         tokens = _parse_ints(line.split("\t"))
+        if not tokens:
+            continue
         if len(tokens) < 2:
             raise ValueError(f"Malformed spawn line {len(spawns)}: '{line}'")
         spawns.append(tokens[-1])
